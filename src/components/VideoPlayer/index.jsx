@@ -15,6 +15,7 @@ const VideoPlayer = () => {
   const [showControls, setShowControls] = useState(true);
   const [showReplay, setShowReplay] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [seeking, setSeeking] = useState(false);
 
   const handlePlayPause = () => {
     setPlaying(!playing);
@@ -26,7 +27,11 @@ const VideoPlayer = () => {
   const handleForward = () =>
     playerRef.current.seekTo(playerRef.current.getCurrentTime() + 10);
   const handlePlaybackRateChange = (rate) => setPlaybackRate(rate);
-  const handleProgress = (state) => setPlayed(state.played);
+  const handleProgress = (state) => {
+    if (!seeking) {
+      setPlayed(state.played);
+    }
+  };
   const handleMouseEnter = () => setShowControls(true);
   const handleMouseLeave = () => {
     if (!isFullscreen) {
@@ -49,6 +54,22 @@ const VideoPlayer = () => {
     playerRef.current.seekTo(0);
     setPlaying(true);
     setShowReplay(false);
+  };
+
+  const handleSeekMouseDown = () => {
+    setSeeking(true);
+  };
+
+  const handleSeekChange = (e) => {
+    const newPlayed = parseFloat(e.target.value);
+    setPlayed(newPlayed);
+    playerRef.current.seekTo(newPlayed);
+  };
+
+  const handleSeekMouseUp = (e) => {
+    setSeeking(false);
+    const newPlayed = parseFloat(e.target.value);
+    playerRef.current.seekTo(newPlayed);
   };
 
   useEffect(() => {
@@ -84,7 +105,6 @@ const VideoPlayer = () => {
           width="100%"
           height="100%"
           controls={false}
-          onClickPreview={() => handlePlayPause()}
         />
         {showControls && (
           <div className="controls">
@@ -92,42 +112,42 @@ const VideoPlayer = () => {
               <button className="btn btn-primary" onClick={handlePlayPause}>
                 {playing ? "Pause" : "Play"}
               </button>
-              <button
-                className="btn btn-outline-primary"
-                onClick={handleRewind}
-              >
+              <button className="btn btn-primary" onClick={handleRewind}>
                 {"<<"}
               </button>
-              <button
-                className="btn btn-outline-primary"
-                onClick={handleForward}
-              >
+              <button className="btn btn-primary" onClick={handleForward}>
                 {">>"}
               </button>
             </div>
-            <div className="progress w-100">
-              <div
+            <div className="progress-container">
+              <input
+                type="range"
+                min={0}
+                max={1}
+                step="any"
+                value={played}
+                onMouseDown={handleSeekMouseDown}
+                onChange={handleSeekChange}
+                onMouseUp={handleSeekMouseUp}
                 className="progress-bar"
-                role="progressbar"
-                style={{ width: `${played * 100}%` }}
               />
             </div>
             <VolumeControl volume={volume} setVolume={setVolume} />
             <div className="btn-group" role="group">
               <button
-                className="btn btn-outline-primary"
+                className="btn btn-primary"
                 onClick={() => handlePlaybackRateChange(0.5)}
               >
                 0.5x
               </button>
               <button
-                className="btn btn-outline-primary"
+                className="btn btn-primary"
                 onClick={() => handlePlaybackRateChange(1)}
               >
                 1x
               </button>
               <button
-                className="btn btn-outline-primary"
+                className="btn btn-primary"
                 onClick={() => handlePlaybackRateChange(1.5)}
               >
                 1.5x
@@ -143,7 +163,7 @@ const VideoPlayer = () => {
         )}
         {showReplay && (
           <button
-            className="btn btn-primary replay-button rounded-5 text-uppercase fs-3"
+            className="btn btn-primary replay-button"
             onClick={handleReplay}
           >
             Replay

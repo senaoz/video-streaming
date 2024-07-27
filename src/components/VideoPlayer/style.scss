@@ -43,6 +43,16 @@
   }
 }
 
+.progress-container {
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+.progress-bar {
+  width: 100%;
+  cursor: pointer;
+}
+
 .volume-slider {
   width: 100px;
 }
