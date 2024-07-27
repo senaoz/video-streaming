@@ -1,5 +1,4 @@
-// Import all of Bootstrap's CSS
-@import "bootstrap/scss/bootstrap";
+@import "../node_modules/bootstrap/scss/bootstrap";
 
 :root {
   color-scheme: light dark;
@@ -16,6 +15,17 @@
   --title1-font-size: 1.6875rem; /* 27px */
   --largetitle-font-size: 3.125rem; /* 50px */
   --md-gap-size: 1.25rem;
+
+  $theme-colors: (
+          "primary":    $red,
+          "secondary":  $secondary,
+          "success":    $success,
+          "info":       $info,
+          "warning":    $warning,
+          "danger":     $danger,
+          "light":      $light,
+          "dark":       $dark
+  );
 }
 
 
@@ -35,17 +45,6 @@ body{
   text-rendering: optimizeLegibility;
   color: var(--primary-white);
   background-color: $black;
-
-  $theme-colors: (
-          "primary":    $red,
-          "secondary":  $secondary,
-          "success":    $success,
-          "info":       $info,
-          "warning":    $warning,
-          "danger":     $danger,
-          "light":      $light,
-          "dark":       $dark
-  );
 
   a {
     color: var(--secondary-red-200);

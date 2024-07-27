@@ -38,19 +38,23 @@ const VolumeControl = ({ volume, setVolume }) => {
           <img src={Speaker} alt="Speaker" />
         )}
       </button>
-      {showSlider && (
-        <div className="volume-slider">
-          <input
-            type="range"
-            min={0}
-            max={1}
-            step={0.01}
-            value={volume}
-            onChange={handleVolumeChange}
-            className="form-range p-2"
-          />
-        </div>
-      )}
+      <div
+        className="volume-slider"
+        style={{
+          opacity: showSlider ? 1 : 0,
+          pointerEvents: showSlider ? "all" : "none",
+        }}
+      >
+        <input
+          type="range"
+          min={0}
+          max={1}
+          step={0.01}
+          value={volume}
+          onChange={handleVolumeChange}
+          className="form-range p-2"
+        />
+      </div>
     </div>
   );
 };

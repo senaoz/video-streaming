@@ -37,10 +37,9 @@
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px;
   z-index: 10;
-
-  * {
-    font-weight: 800;
-  }
+}
+.controls * {
+  font-weight: 800;
 }
 
 .volume-slider {
@@ -89,3 +88,5 @@
   transform: translate(-50%, -50%);
   z-index: 10;
 }
+
+/*# sourceMappingURL=style.css.map */

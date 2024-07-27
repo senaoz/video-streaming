@@ -13,8 +13,14 @@ const VideoPlayer = () => {
   const [volume, setVolume] = useState(0.8);
   const [playbackRate, setPlaybackRate] = useState(1.0);
   const [showControls, setShowControls] = useState(true);
+  const [showReplay, setShowReplay] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
-  const handlePlayPause = () => setPlaying(!playing);
+  const handlePlayPause = () => {
+    setPlaying(!playing);
+    setShowControls(true); // Show controls on play/pause
+  };
+
   const handleRewind = () =>
     playerRef.current.seekTo(playerRef.current.getCurrentTime() - 10);
   const handleForward = () =>
@@ -22,7 +28,11 @@ const VideoPlayer = () => {
   const handlePlaybackRateChange = (rate) => setPlaybackRate(rate);
   const handleProgress = (state) => setPlayed(state.played);
   const handleMouseEnter = () => setShowControls(true);
-  const handleMouseLeave = () => setShowControls(false);
+  const handleMouseLeave = () => {
+    if (!isFullscreen) {
+      setShowControls(false);
+    }
+  };
 
   const handleFullscreen = () => {
     if (screenfull.isEnabled) {
@@ -30,19 +40,36 @@ const VideoPlayer = () => {
     }
   };
 
+  const handleEnded = () => {
+    setShowReplay(true);
+    setPlaying(false);
+  };
+
+  const handleReplay = () => {
+    playerRef.current.seekTo(0);
+    setPlaying(true);
+    setShowReplay(false);
+  };
+
   useEffect(() => {
     if (screenfull.isEnabled) {
       screenfull.on("change", () => {
         setIsFullscreen(screenfull.isFullscreen);
+        if (screenfull.isFullscreen) {
+          setTimeout(() => setShowControls(false), 3000);
+        } else {
+          setShowControls(true);
+        }
       });
     }
   }, []);
 
   return (
     <div
-      className={"container mt-4 mb-4"}
+      className={`container mt-4 mb-4 ${isFullscreen ? "fullscreen" : ""}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onMouseMove={() => isFullscreen && setShowControls(true)}
     >
       <div className="player-wrapper" ref={playerWrapperRef}>
         <ReactPlayer
@@ -53,9 +80,11 @@ const VideoPlayer = () => {
           playbackRate={playbackRate}
           volume={volume}
           onProgress={handleProgress}
+          onEnded={handleEnded}
           width="100%"
           height="100%"
           controls={false}
+          onClickPreview={() => handlePlayPause()}
         />
         {showControls && (
           <div className="controls">
@@ -81,7 +110,7 @@ const VideoPlayer = () => {
                 className="progress-bar"
                 role="progressbar"
                 style={{ width: `${played * 100}%` }}
-              ></div>
+              />
             </div>
             <VolumeControl volume={volume} setVolume={setVolume} />
             <div className="btn-group" role="group">
@@ -111,6 +140,14 @@ const VideoPlayer = () => {
               <img src={FullscreenIcon} alt="Fullscreen" />
             </button>
           </div>
+        )}
+        {showReplay && (
+          <button
+            className="btn btn-primary replay-button rounded-5 text-uppercase fs-3"
+            onClick={handleReplay}
+          >
+            Replay
+          </button>
         )}
       </div>
     </div>
