@@ -1,0 +1,74 @@
+/* src/Player.css */
+.player-wrapper {
+  position: relative;
+  max-height: 720px !important;
+  background: black;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
+.fullscreen .player-wrapper {
+  max-height: none;
+  height: 100%;
+  width: 100%;
+}
+
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  column-gap: 0.5em;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  z-index: 10;
+}
+
+.volume-slider {
+  width: 100px;
+}
+
+/* VolumeControl CSS */
+.volume-control {
+  position: relative;
+  display: inline-block;
+}
+
+.volume-icon {
+  color: white;
+  border: none;
+  background: none;
+
+  img {
+    max-width: 2em;
+  }
+}
+
+.volume-slider {
+  position: absolute;
+  bottom: 6.86em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%) rotate(-90deg);
+  width: 160px;
+  height: 32px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+
+}
+
+.fullscreenButton{
+  width: 38px;
+  height: 38px;
+}

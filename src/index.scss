@@ -1,0 +1,56 @@
+// Import all of Bootstrap's CSS
+@import "bootstrap/scss/bootstrap";
+
+:root {
+  color-scheme: light dark;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --caption2-font-size: 0.6875rem; /* 11px */
+  --caption1-font-size: 0.8125rem; /* 13px */
+  --smallbody-font-size: 0.875rem; /* 14px */
+  --body-font-size: 1rem; /* 16px */
+  --headline-font-size: 1.125rem; /* 18px */
+  --title3-font-size: 1.25rem; /* 20px */
+  --title2-font-size: 1.5rem; /* 24px */
+  --title1-font-size: 1.6875rem; /* 27px */
+  --largetitle-font-size: 3.125rem; /* 50px */
+  --md-gap-size: 1.25rem;
+}
+
+
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+body{
+  font-family: SF Pro Display, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  color: var(--primary-white);
+  background-color: $black;
+
+  $theme-colors: (
+          "primary":    $red,
+          "secondary":  $secondary,
+          "success":    $success,
+          "info":       $info,
+          "warning":    $warning,
+          "danger":     $danger,
+          "light":      $light,
+          "dark":       $dark
+  );
+
+  a {
+    color: var(--secondary-red-200);
+    text-decoration: none;
+    font-weight: 600;
+  }
+}
+
