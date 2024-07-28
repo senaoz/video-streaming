@@ -17,7 +17,7 @@
   --md-gap-size: 1.25rem;
 
   $theme-colors: (
-          "primary":    $red,
+          "primary":    #C42838FF,
           "secondary":  $secondary,
           "success":    $success,
           "info":       $info,
@@ -36,15 +36,16 @@
   width: 100vw;
 }
 
-body{
+body {
   font-family: SF Pro Display, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
-  color: var(--primary-white);
+  color: $white;
   background-color: $black;
+
 
   a {
     color: var(--secondary-red-200);
@@ -53,3 +54,13 @@ body{
   }
 }
 
+.navbar {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+}
+
+
+.pt-8 {
+  padding-top: 6rem !important;
+}

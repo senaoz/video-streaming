@@ -1,10 +1,10 @@
 import "./style.scss";
 import React, { useState } from "react";
-import Mute from "./mute.svg";
-import Speaker from "./speaker.svg";
+import Mute from "./icons/volume-x.svg";
+import Speaker from "./icons/volume-2.svg";
 
 const VolumeControl = ({ volume, setVolume }) => {
-  const [showSlider, setShowSlider] = useState(false);
+  const [showSlider, setShowSlider] = useState(true);
   const [muted, setMuted] = useState(false);
   const [prevVolume, setPrevVolume] = useState(volume);
 
