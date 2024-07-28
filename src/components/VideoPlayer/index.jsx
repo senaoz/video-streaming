@@ -3,9 +3,13 @@ import ReactPlayer from "react-player";
 import screenfull from "screenfull";
 import "./style.scss";
 import VolumeControl from "./VolumeControl.jsx";
-import FullscreenIcon from "./fullscreen.svg";
+import FullscreenIcon from "./icons/fullscreen.svg";
+import PlayIcon from "./icons/play.svg";
+import PauseIcon from "./icons/pause.svg";
+import SkipF from "./icons/skip-forward.svg";
+import SkipB from "./icons/skip-back.svg";
 
-const VideoPlayer = () => {
+const VideoPlayer = ({ url }) => {
   const playerRef = useRef(null);
   const playerWrapperRef = useRef(null);
   const [playing, setPlaying] = useState(false);
@@ -87,7 +91,7 @@ const VideoPlayer = () => {
 
   return (
     <div
-      className={`container mt-4 mb-4 ${isFullscreen ? "fullscreen" : ""}`}
+      className={`container pt-4 pb-4 ${isFullscreen ? "fullscreen" : "pt-8"}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseMove={() => isFullscreen && setShowControls(true)}
@@ -96,7 +100,7 @@ const VideoPlayer = () => {
         <ReactPlayer
           ref={playerRef}
           className="react-player"
-          url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          url={url || "https://www.youtube.com/watch?v=UaVTIH8mujA"}
           playing={playing}
           playbackRate={playbackRate}
           volume={volume}
@@ -108,16 +112,18 @@ const VideoPlayer = () => {
         />
         {showControls && (
           <div className="controls">
-            <div className="btn-group" role="group">
-              <button className="btn btn-primary" onClick={handlePlayPause}>
-                {playing ? "Pause" : "Play"}
-              </button>
-              <button className="btn btn-primary" onClick={handleRewind}>
-                {"<<"}
-              </button>
-              <button className="btn btn-primary" onClick={handleForward}>
-                {">>"}
-              </button>
+            <div onClick={handlePlayPause}>
+              {playing ? (
+                <img src={PauseIcon} alt="Pause" />
+              ) : (
+                <img src={PlayIcon} alt="Play" />
+              )}
+            </div>
+            <div onClick={handleRewind}>
+              <img src={SkipB} alt="Rewind" />
+            </div>
+            <div onClick={handleForward}>
+              <img src={SkipF} alt="Forward" />
             </div>
             <div className="progress-container">
               <input
@@ -163,7 +169,7 @@ const VideoPlayer = () => {
         )}
         {showReplay && (
           <button
-            className="btn btn-primary replay-button"
+            className="btn btn-primary replay-button shadow"
             onClick={handleReplay}
           >
             Replay
