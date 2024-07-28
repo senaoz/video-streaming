@@ -5,6 +5,7 @@ import "./scss/styles.scss";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Navbar from "./components/Navbar/index.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/movie/:id" element={<Movie />} />
           <Route path="/movie/*" element={<Movie />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
