@@ -68,3 +68,13 @@ body {
 .pt-8 {
   padding-top: 6rem !important;
 }
+
+.movie-card-container {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+}
+
+.justify-items-center {
+  justify-items: center;
+}

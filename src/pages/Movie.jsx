@@ -16,10 +16,17 @@ function Movie({ movieData }) {
 
   return (
     <>
-      {id && <VideoPlayer url={videoUrl} />}
-      <div className={`container ${!id && `pt-8`}`}>
-        <h2 className="m-3">Suggested Movies</h2>
-        <div className="d-flex flex-wrap justify-content-between">
+      {id ? (
+        <VideoPlayer url={videoUrl} />
+      ) : (
+        <div className="container pt-8">
+          <h2 className="m-3">Suggested Movies</h2>
+        </div>
+      )}
+      <div className={`container pb-5`}>
+        <div
+          className={`movie-card-container ${!id && `justify-items-center`}`}
+        >
           {movieData.map((movie, index) => (
             <MovieCard
               key={index}

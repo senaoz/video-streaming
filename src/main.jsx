@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import Movie from "./pages/Movie.jsx";
 import "./scss/styles.scss";

@@ -12,7 +12,7 @@ function Home({ movieData }) {
           link: `/movie/${movie.trailer.youtube_video_id}`,
         }))}
       />
-      <div className="d-flex flex-wrap justify-content-center p-5">
+      <div className="movie-card-container p-5 justify-items-center">
         {movieData.map((movie, index) => (
           <MovieCard
             key={index}
