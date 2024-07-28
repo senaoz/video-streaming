@@ -1,12 +1,13 @@
 import React from "react";
 import "./style.scss";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-transparent p-3">
-      <a className="navbar-brand" href="#">
+      <Link className="navbar-brand" to="/">
         Movie Trailers
-      </a>
+      </Link>
       <button
         className="navbar-toggler"
         type="button"
@@ -21,19 +22,19 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item active">
-            <a className="nav-link" href="/">
+            <Link className="nav-link" to="/">
               Home
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/movie">
+            <Link className="nav-link" to="/movie">
               Movies
-            </a>
+            </Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/movie/UaVTIH8mujA">
+            <Link className="nav-link" to="/movie/UaVTIH8mujA">
               Selected Movie of The Month: 'God Father'
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

@@ -1,12 +1,15 @@
 import React from "react";
 import "./style.scss";
+import { useNavigate } from "react-router-dom";
 
 const MovieCard = ({ title, thumbnail, youtube_video_id }) => {
+  const navigate = useNavigate();
+
   return (
     <div
       className="movie-card card"
       onClick={() => {
-        window.location.href = `/movie/${youtube_video_id}`;
+        navigate(`/movie/${youtube_video_id}`);
       }}
     >
       <div className="card-img-container">
